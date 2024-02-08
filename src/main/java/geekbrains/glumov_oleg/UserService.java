@@ -31,9 +31,9 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> getAllUser() {
-        createUser(null, "Oleg", 25, "ol@ea.com");
-        createUser(null, "Roman", 22, "ro@ea.com");
-        createUser(null, "Dima", 28, "dm@ea.com");
+        userRepository.save(createUser(null, "Oleg", 25, "ol@ea.com"));
+        userRepository.save(createUser(null, "Roman", 22, "ro@ea.com"));
+        userRepository.save(createUser(null, "Dima", 28, "dm@ea.com"));
         return userRepository.findAll();
     }
 

@@ -27,8 +27,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String getUser(@PathVariable Long id, Model model){
-        model.addAttribute("users", userService.getUserByID(id));
-        return "usersProfile";
+        model.addAttribute("user", userService.getUserByID(id));
+        return "userProfile";
     }
 
     @RequestMapping(method = RequestMethod.POST)
