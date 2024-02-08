@@ -15,8 +15,9 @@ public class UserService {
         this.autoInfoService = autoInfoService;
     }
 
-    public User createUser(String name, int age, String email) {
+    public User createUser(Long id, String name, int age, String email) {
         User user = new User();
+        user.setId(id);
         user.setName(name);
         user.setAge(age);
         user.setEmail(email);
@@ -30,6 +31,9 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<User> getAllUser() {
+        createUser(null, "Oleg", 25, "ol@ea.com");
+        createUser(null, "Roman", 22, "ro@ea.com");
+        createUser(null, "Dima", 28, "dm@ea.com");
         return userRepository.findAll();
     }
 

@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/users")
@@ -24,13 +21,19 @@ public class UserController {
 
     @GetMapping
     public String listUsers(Model model){
-        model.addAllAttributes("users", userService.getAllUser());
+        model.addAttribute("users", userService.getAllUser());
         return "users";
     }
 
+    @GetMapping("/{id}")
+    public String getUser(@PathVariable Long id, Model model){
+        model.addAttribute("users", userService.getUserByID(id));
+        return "usersProfile";
+    }
+
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<User> createUser(@RequestParam String name, @RequestParam int age, @RequestParam String email) {
-        return new ResponseEntity<>(userService.createUser(name, age, email), HttpStatus.CREATED);
+    public ResponseEntity<User> createUser(@RequestParam Long id, @RequestParam String name, @RequestParam int age, @RequestParam String email) {
+        return new ResponseEntity<>(userService.createUser(id, name, age, email), HttpStatus.CREATED);
     }
 
 }
